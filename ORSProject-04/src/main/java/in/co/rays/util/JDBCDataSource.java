@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+//JDBC DataSource is a Data Connection Pool.
+
 public final class JDBCDataSource {
 
 	private static JDBCDataSource jds = null;
