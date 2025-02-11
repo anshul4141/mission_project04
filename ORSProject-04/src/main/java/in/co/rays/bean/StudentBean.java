@@ -2,16 +2,16 @@ package in.co.rays.bean;
 
 import java.util.Date;
 
-public class UserBean extends BaseBean {
+public class StudentBean extends BaseBean {
 
 	private String firstName;
 	private String lastName;
-	private String login;
-	private String password;
 	private Date dob;
-	private String mobileNo;
-	private Long roleId;
 	private String gender;
+	private String mobileNo;
+	private String email;
+	private long collegeId;
+	private String collegeName;
 
 	public String getFirstName() {
 		return firstName;
@@ -29,28 +29,20 @@ public class UserBean extends BaseBean {
 		this.lastName = lastName;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public Date getDob() {
 		return dob;
 	}
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getMobileNo() {
@@ -61,19 +53,28 @@ public class UserBean extends BaseBean {
 		this.mobileNo = mobileNo;
 	}
 
-	public Long getRoleId() {
-		return roleId;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getGender() {
-		return gender;
+	public long getCollegeId() {
+		return collegeId;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setCollegeId(long collegeId) {
+		this.collegeId = collegeId;
 	}
+
+	public String getCollegeName() {
+		return collegeName;
+	}
+
+	public void setCollegeName(String collegeName) {
+		this.collegeName = collegeName;
+	}
+
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.co.rays.bean.RoleBean;
-import in.co.rays.execption.DuplicateRecordException;
+import in.co.rays.exception.DuplicateRecordException;
 import in.co.rays.util.JDBCDataSource;
 
 public class RoleModel {
