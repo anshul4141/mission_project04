@@ -3,7 +3,7 @@ package in.co.rays.bean;
 import java.sql.Timestamp;
 
 // BaseBean is parent Bean of all Bean classes
-public class BaseBean {
+public abstract class BaseBean implements DropdownListBean {
 
 	private Long id;
 	private String createdBy;

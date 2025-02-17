@@ -31,6 +31,9 @@ public abstract class BaseCtl extends HttpServlet {
 	public static final String OP_LOG_OUT = "Logout";
 	public static final String OP_RESET = "Reset";
 	public static final String OP_UPDATE = "update";
+	
+	public static final String MSG_SUCCESS = "success";
+	public static final String MSG_ERROR = "error";
 
 	protected boolean validate(HttpServletRequest request) {
 		return true;
