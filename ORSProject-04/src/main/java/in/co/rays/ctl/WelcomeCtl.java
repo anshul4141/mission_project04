@@ -15,6 +15,7 @@ public class WelcomeCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("in get method...");
 		ServletUtility.forward(getView(), request, response);
 	}
 
@@ -26,6 +27,9 @@ public class WelcomeCtl extends BaseCtl {
 
 	@Override
 	protected String getView() {
+		// TODO Auto-generated method stub
 		return ORSView.WELCOME_VIEW;
 	}
+
+	
 }

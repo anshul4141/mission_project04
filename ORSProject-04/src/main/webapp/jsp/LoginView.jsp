@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.ctl.LoginCtl"%>
 <%@page import="in.co.rays.util.ServletUtility"%>
 <%@page import="in.co.rays.util.DataUtility"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -37,8 +38,9 @@
 				<tr>
 					<th></th>
 					<td colspan="2"><input type="submit" name="operation"
-						value="signIn"> &nbsp; <input type="submit"
-						name="operation" value="signUp"> &nbsp;</td>
+						value="<%=LoginCtl.OP_SIGN_IN%>"> &nbsp; <input
+						type="submit" name="operation" value="<%=LoginCtl.OP_SIGN_UP%>">
+						&nbsp;</td>
 				</tr>
 				<tr>
 					<th></th>

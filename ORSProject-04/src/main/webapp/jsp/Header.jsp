@@ -13,7 +13,7 @@
 			<td width="90%"><a style="text-decoration: none;"
 				href="<%=ORSView.WELCOME_CTL%>"><b>Welcome</b></a> | <a
 				href="<%=ORSView.LOGIN_CTL%>"><b>Login</b></a></td>
-			<td rowspan="2" align="right"><img
+			<td align="right"><img
 				src="<%=ORSView.APP_CONTEXT%>/img/customLogo.jpg" width="318"
 				height="90"></td>
 		</tr>

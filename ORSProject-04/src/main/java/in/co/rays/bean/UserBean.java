@@ -88,4 +88,5 @@ public class UserBean extends BaseBean {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

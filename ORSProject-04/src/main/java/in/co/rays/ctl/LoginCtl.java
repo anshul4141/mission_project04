@@ -22,8 +22,8 @@ import in.co.rays.util.ServletUtility;
 @WebServlet("/LoginCtl")
 public class LoginCtl extends BaseCtl {
 
-	public static final String OP_SIGN_IN = "Sign In";
-	public static final String OP_SIGN_UP = "Sign Up";
+	public static final String OP_SIGN_IN = "SignIn";
+	public static final String OP_SIGN_UP = "SignUp";
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

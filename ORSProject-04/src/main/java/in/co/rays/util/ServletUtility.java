@@ -15,6 +15,7 @@ public class ServletUtility {
 
 	public static void forward(String page, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
+		System.out.println("page === " + page);
 		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request, response);
 	}
