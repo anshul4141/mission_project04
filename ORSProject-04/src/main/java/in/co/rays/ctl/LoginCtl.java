@@ -35,6 +35,15 @@ public class LoginCtl extends BaseCtl {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String op = DataUtility.getString(request.getParameter("operation"));
+
+		if (OP_SIGN_IN.equalsIgnoreCase(op)) {
+
+			// write user login logic
+
+		} else if (OP_SIGN_UP.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.USER_REGISTRATION_CTL, request, response);
+		}
 
 	}
 

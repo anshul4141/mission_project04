@@ -290,7 +290,7 @@ public class UserModel {
 				Date d = new Date(bean.getDob().getTime());
 				sql.append(" and dob like '" + d + "%'");
 			}
-			if (bean.getRoleId() != null && bean.getRoleId() > 0) {
+			if (bean.getRoleId() > 0) {
 				sql.append(" and role_id = " + bean.getRoleId());
 			}
 		}

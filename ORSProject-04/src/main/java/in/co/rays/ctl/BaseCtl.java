@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.bean.BaseBean;
+import in.co.rays.bean.UserBean;
 import in.co.rays.util.DataUtility;
 import in.co.rays.util.DataValidator;
 import in.co.rays.util.ServletUtility;
@@ -31,7 +32,7 @@ public abstract class BaseCtl extends HttpServlet {
 	public static final String OP_LOG_OUT = "Logout";
 	public static final String OP_RESET = "Reset";
 	public static final String OP_UPDATE = "update";
-	
+
 	public static final String MSG_SUCCESS = "success";
 	public static final String MSG_ERROR = "error";
 
@@ -41,6 +42,39 @@ public abstract class BaseCtl extends HttpServlet {
 
 	protected BaseBean populateBean(HttpServletRequest request) {
 		return null;
+	}
+
+	// Populates basic bean fields like createdBy, modifiedBy, createdDatetime, and
+	// modifiedDatetime.
+	protected BaseBean populateDTO(BaseBean dto, HttpServletRequest request) {
+		String createdBy = request.getParameter("createdBy");
+		String modifiedBy = null;
+
+		// Retrieve the user from the session
+		UserBean userBean = (UserBean) request.getSession().getAttribute("user");
+
+		if (userBean == null) {
+			createdBy = modifiedBy = "root"; // Default user if not logged in
+		} else {
+			modifiedBy = userBean.getLogin();
+
+			if (DataValidator.isNull(createdBy) || "null".equalsIgnoreCase(createdBy)) {
+				createdBy = modifiedBy; // Set createdBy to current user on initial creation
+			}
+		}
+
+		dto.setCreatedBy(createdBy);
+		dto.setModifiedBy(modifiedBy);
+
+		long createdDatetime = DataUtility.getLong(request.getParameter("createdDatetime"));
+		if (createdDatetime > 0) {
+			dto.setCreatedDatetime(DataUtility.getTimestamp(createdDatetime));
+		} else {
+			dto.setCreatedDatetime(DataUtility.getCurrentTimestamp());
+		}
+
+		dto.setModifiedDatetime(DataUtility.getCurrentTimestamp());
+		return dto;
 	}
 
 	protected void preload(HttpServletRequest request) {
@@ -54,19 +88,14 @@ public abstract class BaseCtl extends HttpServlet {
 		preload(request);
 
 		String op = DataUtility.getString(request.getParameter("operation"));
-		System.out.println("Bctl servi op" + op);
 		// Check if operation is not DELETE, VIEW, CANCEL, RESET and NULL then
 		// perform input data validation
 
 		if (DataValidator.isNotNull(op) && !OP_CANCEL.equalsIgnoreCase(op) && !OP_VIEW.equalsIgnoreCase(op)
 				&& !OP_DELETE.equalsIgnoreCase(op) && !OP_RESET.equalsIgnoreCase(op)) {
-			System.out.println("Bctl 5 operation");
 			// Check validation, If fail then send back to page with error
 			// messages
-
 			if (!validate(request)) {
-				System.out.println("running not validate>>>>>>>");
-				System.out.println("Bctl validate ");
 				BaseBean bean = (BaseBean) populateBean(request);
 				// setBean method call for show inserted data
 				ServletUtility.setBean(bean, request);
@@ -75,10 +104,6 @@ public abstract class BaseCtl extends HttpServlet {
 			}
 		}
 		super.service(request, response);
-		System.out.println("BaseCtl super.service method ==> ");
-		System.out.println("super.service called method ==> " + request.getMethod() + " >> " + " / "
-				+ "Submit Operation is = " + response.encodeURL(op));
-
 	}
 
 	protected abstract String getView();
