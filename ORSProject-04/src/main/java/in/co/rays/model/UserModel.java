@@ -5,12 +5,16 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import in.co.rays.bean.UserBean;
 import in.co.rays.exception.ApplicationException;
 import in.co.rays.exception.DatabaseException;
 import in.co.rays.exception.DuplicateRecordException;
+import in.co.rays.util.EmailBuilder;
+import in.co.rays.util.EmailMessage;
+import in.co.rays.util.EmailUtility;
 import in.co.rays.util.JDBCDataSource;
 
 public class UserModel {
@@ -36,6 +40,25 @@ public class UserModel {
 	}
 
 	public Integer add(UserBean bean) throws DuplicateRecordException, ApplicationException {
+
+		if (bean == null) {
+			System.out.println("bean is null");
+		} else {
+			System.out.println("bean is not null");
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getFirstName());
+			System.out.print("\t" + bean.getLastName());
+			System.out.print("\t" + bean.getLogin());
+			System.out.print("\t" + bean.getPassword());
+			System.out.print("\t" + bean.getDob());
+			System.out.print("\t" + bean.getMobileNo());
+			System.out.print("\t" + bean.getRoleId());
+			System.out.print("\t" + bean.getGender());
+			System.out.print("\t" + bean.getCreatedBy());
+			System.out.print("\t" + bean.getModifiedBy());
+			System.out.print("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+		}
 
 		Connection conn = null;
 		int pk = 0;
@@ -335,5 +358,24 @@ public class UserModel {
 			JDBCDataSource.closeConnection(conn);
 		}
 		return list;
+	}
+
+	public long registerUser(UserBean bean) throws ApplicationException, DuplicateRecordException {
+		long pk = add(bean);
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("login", bean.getLogin());
+		map.put("password", bean.getPassword());
+
+		String message = EmailBuilder.getUserRegistrationMessage(map);
+		EmailMessage msg = new EmailMessage();
+
+		msg.setTo(bean.getLogin());
+		msg.setSubject("Registration is Successful for ORS Project Sunilos");
+		msg.setMessage(message);
+		msg.setMessageType(EmailMessage.HTML_MSG);
+
+		EmailUtility.sendMail(msg);
+		return pk;
 	}
 }

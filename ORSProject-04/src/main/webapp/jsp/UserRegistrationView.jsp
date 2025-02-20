@@ -1,11 +1,14 @@
+<%@page import="in.co.rays.util.ServletUtility"%>
 <%@page import="in.co.rays.ctl.UserRegistrationCtl"%>
+<%@page import="in.co.rays.util.DataUtility"%>
 <%@page import="in.co.rays.util.HTMLUtility"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="in.co.rays.util.DataUtility"%>
-<%@page import="in.co.rays.util.ServletUtility"%>
-<%@page import="in.co.rays.ctl.ORSView"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -14,10 +17,13 @@
 		<jsp:useBean id="bean" class="in.co.rays.bean.UserBean"
 			scope="request" />
 
+
 		<div align="center">
-			<h1>
-				<font>User Registration</font>
-			</h1>
+			<h1>User Registration</h1>
+
+			<h3>
+				<font color="green"><%=ServletUtility.getSuccessMessage(request)%></font>
+			</h3>
 
 			<!-- Hidden Fields -->
 			<input type="hidden" name="id" value="<%=bean.getId()%>" /> <input
@@ -81,7 +87,6 @@
 					<td><input type="text" name="mobileNo"
 						placeholder="Enter Mobile No."
 						value="<%=DataUtility.getStringData(bean.getMobileNo())%>" /></td>
-					<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("mobileNo", request)%></font></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -92,6 +97,7 @@
 				</tr>
 			</table>
 		</div>
+
 	</form>
 </body>
 </html>
