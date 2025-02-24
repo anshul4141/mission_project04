@@ -1,0 +1,24 @@
+1. Input Validation Flow = 
+a. UserRegistrationView.jsp pe SignUp ke button par click kiya.
+b. UserRegistrationCtl pe request gai usme humne BaceCtl ko extends kiya.
+c. UserRgistrationCtl pe humne validate method ko override kiya
+d. BaceCtl ki service method choli operation ko get kiye op=signUp mila or usme if vali condition true hui or child ki validate method chali
+
+e. Validate method me humne ek Boolean type ka variable banaya isValid=true or sume condition di if (DataValidator.isNull(firstName)) toh humne request.setAttribute("firstName", PropertyReader.getValue("error.require", "First Name"));
+
+f. valid name email or password etc ke liye humne isName, isEmail, isPassword etc method ka use kiya condtion di else if (!DataValidator.isName(firstName))
+
+g. UserRegistrationView pe error message ko print karaya <%=ServletUtility.getErrorMessage("firstName", request)%>
+
+2. Business Validation Flow = 
+a. UserRegistrationView.jsp pe SignUp ke button par click kiya.
+b. UserRegistrationCtl pe request gai or uski post method chali.
+c. operation ko get kiye = String op = DataUtility.getString(request.getParameter("operation"));
+d. condition di if (OP_SIGN_UP.equalsIgnoreCase(op)) ho toh data ko populate kiya UserBean bean = (UserBean) populateBean(request);
+
+e. user model ka object banaya = UserModel model = new UserModel
+f. model.register method ko call kiya usem humne add method ko call kiya or duplicateRecordException ko throw kiya
+g. or usko userRegistrationCtl pe catch block me catch kiya or ServletUtility.setErrorMessage("", request); 
+h. ServletUtility.forward(getView(), request);
+i. UserRegistrationView.jsp pe humne <%=%> me ServletUtility.getErrorMessage(request);
+
