@@ -88,16 +88,14 @@ public abstract class BaseCtl extends HttpServlet {
 		preload(request);
 
 		String op = DataUtility.getString(request.getParameter("operation"));
-		// Check if operation is not DELETE, VIEW, CANCEL, RESET and NULL then
-		// perform input data validation
+
+		System.out.println("op in service = " + op);
 
 		if (DataValidator.isNotNull(op) && !OP_CANCEL.equalsIgnoreCase(op) && !OP_VIEW.equalsIgnoreCase(op)
 				&& !OP_DELETE.equalsIgnoreCase(op) && !OP_RESET.equalsIgnoreCase(op)) {
-			// Check validation, If fail then send back to page with error
-			// messages
+
 			if (!validate(request)) {
 				BaseBean bean = (BaseBean) populateBean(request);
-				// setBean method call for show inserted data
 				ServletUtility.setBean(bean, request);
 				ServletUtility.forward(getView(), request, response);
 				return;

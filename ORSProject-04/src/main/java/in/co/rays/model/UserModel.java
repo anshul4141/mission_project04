@@ -41,24 +41,6 @@ public class UserModel {
 
 	public Integer add(UserBean bean) throws DuplicateRecordException, ApplicationException {
 
-		if (bean == null) {
-			System.out.println("bean is null");
-		} else {
-			System.out.println("bean is not null");
-			System.out.print(bean.getId());
-			System.out.print("\t" + bean.getFirstName());
-			System.out.print("\t" + bean.getLastName());
-			System.out.print("\t" + bean.getLogin());
-			System.out.print("\t" + bean.getPassword());
-			System.out.print("\t" + bean.getDob());
-			System.out.print("\t" + bean.getMobileNo());
-			System.out.print("\t" + bean.getRoleId());
-			System.out.print("\t" + bean.getGender());
-			System.out.print("\t" + bean.getCreatedBy());
-			System.out.print("\t" + bean.getModifiedBy());
-			System.out.print("\t" + bean.getCreatedDatetime());
-			System.out.println("\t" + bean.getModifiedDatetime());
-		}
 
 		Connection conn = null;
 		int pk = 0;
