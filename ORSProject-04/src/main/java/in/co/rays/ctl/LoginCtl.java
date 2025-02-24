@@ -26,8 +26,23 @@ public class LoginCtl extends BaseCtl {
 	public static final String OP_SIGN_UP = "SignUp";
 
 	@Override
+	protected BaseBean populateBean(HttpServletRequest request) {
+		UserBean bean = new UserBean();
+		bean.setLogin(DataUtility.getString(request.getParameter("login")));
+		bean.setPassword(DataUtility.getString(request.getParameter("password")));
+		return bean;
+	}
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String op = DataUtility.getString(request.getParameter("operation"));
+
+		if (OP_LOG_OUT.equalsIgnoreCase(op)) {
+			HttpSession session = request.getSession();
+			session.invalidate();
+			ServletUtility.setSuccessMessage("Logged out successfully.", request);
+		}
 
 		ServletUtility.forward(getView(), request, response);
 	}
@@ -35,13 +50,34 @@ public class LoginCtl extends BaseCtl {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		System.out.println("in post method");
 		String op = DataUtility.getString(request.getParameter("operation"));
+		UserModel userModel = new UserModel();
+		RoleModel roleModel = new RoleModel();
+		HttpSession session = request.getSession();
 
 		if (OP_SIGN_IN.equalsIgnoreCase(op)) {
+			UserBean bean = (UserBean) populateBean(request);
 
-			// user login logic
+			try {
+				bean = userModel.authenticate(bean.getLogin(), bean.getPassword());
+				if (bean != null) {
+					System.out.println("bean null nhi hai");
+					session.setAttribute("user", bean);
 
+					RoleBean roleBean = roleModel.findByPk(bean.getRoleId());
+					session.setAttribute("role", roleBean.getName());
+					ServletUtility.redirect(ORSView.WELCOME_CTL, request, response);
+				} else {
+					ServletUtility.setBean(bean, request);
+					ServletUtility.setErrorMessage("Invalid Login ID or Password.", request);
+					ServletUtility.forward(getView(), request, response);
+				}
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
 			ServletUtility.redirect(ORSView.USER_REGISTRATION_CTL, request, response);
 		}
