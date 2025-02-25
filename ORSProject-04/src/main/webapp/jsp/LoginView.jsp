@@ -29,20 +29,16 @@
 				<tr>
 					<th align="left">Login Id<span style="color: red">*</span></th>
 					<td align="center"><input type="text" name="login"
-						placeholder="Enter Email Id" value=""></td>
+						placeholder="Enter Email Id" value=""> <font
+						style="position: fixed" color="red"> <%=ServletUtility.getErrorMessage("login", request)%></font>
+					</td>
 				</tr>
 				<tr>
 					<th align="left">Password<span style="color: red">*</span></th>
 					<td align="center"><input type="password" name="password"
-						placeholder="Enter Password" value="">
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
+						placeholder="Enter Password" value=""> <font
+						style="position: fixed" color="red"> <%=ServletUtility.getErrorMessage("password", request)%></font>
+					</td>
 				</tr>
 				<tr>
 					<th></th>

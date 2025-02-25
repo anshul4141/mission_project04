@@ -22,8 +22,8 @@
 		<tr>
 			<td width="90%"><a style="text-decoration: none;"
 				href="<%=ORSView.WELCOME_CTL%>"><b>Welcome</b></a> | <%
-				if (userLoggedIn) {
-			%> <a style="text-decoration: none;"
+ 	if (userLoggedIn) {
+ %> <a style="text-decoration: none;"
 				href="<%=ORSView.LOGIN_CTL%>?operation=<%=LoginCtl.OP_LOG_OUT%>"><b>Logout</b></a>
 				<%
 					} else {
@@ -31,7 +31,6 @@
 				<%
 					}
 				%></td>
-
 			<td rowspan="2" align="right"><img
 				src="<%=ORSView.APP_CONTEXT%>/img/customLogo.jpg" width="318"
 				height="90"></td>

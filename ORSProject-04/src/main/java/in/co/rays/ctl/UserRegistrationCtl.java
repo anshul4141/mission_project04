@@ -26,7 +26,7 @@ public class UserRegistrationCtl extends BaseCtl {
 
 	@Override
 	protected boolean validate(HttpServletRequest request) {
-		
+
 		boolean isValid = true;
 
 		// Validate First Name
