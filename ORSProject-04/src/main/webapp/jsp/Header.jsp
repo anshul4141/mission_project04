@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.bean.RoleBean"%>
 <%@page import="in.co.rays.ctl.LoginCtl"%>
 <%@page import="in.co.rays.bean.UserBean"%>
 <%@page import="in.co.rays.ctl.ORSView"%>
@@ -22,8 +23,8 @@
 		<tr>
 			<td width="90%"><a style="text-decoration: none;"
 				href="<%=ORSView.WELCOME_CTL%>"><b>Welcome</b></a> | <%
- 	if (userLoggedIn) {
- %> <a style="text-decoration: none;"
+				if (userLoggedIn) {
+			%> <a style="text-decoration: none;"
 				href="<%=ORSView.LOGIN_CTL%>?operation=<%=LoginCtl.OP_LOG_OUT%>"><b>Logout</b></a>
 				<%
 					} else {
@@ -38,6 +39,24 @@
 		<tr>
 			<td>
 				<h3><%=welcomeMsg%></h3>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<%
+					if (userLoggedIn) {
+				%> <%
+ 	if (userBean.getRoleId() == RoleBean.ADMIN) {
+ %> <a href="<%=ORSView.USER_CTL%>">Add User</a> | <a
+				href="<%=ORSView.USER_LIST_CTL%>">User List</a> <%
+ 	}
+ %> <%
+ 	if (userBean.getRoleId() == RoleBean.STUDENT) {
+ %> <%
+ 	}
+ %> <%
+ 	}
+ %>
 			</td>
 		</tr>
 	</table>
