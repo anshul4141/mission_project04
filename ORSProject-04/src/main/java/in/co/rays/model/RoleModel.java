@@ -162,6 +162,7 @@ public class RoleModel {
 		List list = new ArrayList();
 
 		while (rs.next()) {
+			System.out.println("in rs.next =====>");
 			bean = new RoleBean();
 			bean.setId(rs.getLong(1));
 			bean.setName(rs.getString(2));

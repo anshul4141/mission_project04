@@ -5,17 +5,17 @@ import java.sql.Timestamp;
 // BaseBean is parent Bean of all Bean classes
 public abstract class BaseBean implements DropdownListBean {
 
-	private Long id;
-	private String createdBy;
-	private String modifiedBy;
-	private Timestamp createdDatetime;
-	private Timestamp modifiedDatetime;
+	protected long id;
+	protected String createdBy;
+	protected String modifiedBy;
+	protected Timestamp createdDatetime;
+	protected Timestamp modifiedDatetime;
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
